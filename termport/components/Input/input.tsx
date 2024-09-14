@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useDebugValue, useEffect, useState } from "react"
 
 const InputCmd = () => {
     const[input,setInput]=useState("");
@@ -10,6 +10,41 @@ const InputCmd = () => {
               return "projects, resume, contact me";
           case "cat projects.txt":
             return "meow";
+
+          case "neofetch":
+              return(
+                <div className="flex flex-row  ">
+
+                  <div>
+                  <p>
+                BatmanOS 1.0 • Kernel: Linux Arch
+                <br />
+                Uptime: 7 days • Packages: 1234 (pacman)
+                <br />
+                Shell: zsh • Resolution: 1920x1080
+                  </p>
+                  </div>
+
+                  <div >
+
+                   ██▓███  ▄▄▄       ▄████▄  
+                   ▓██░  ██▒████▄    ▒██▀ ▀█  
+                   ▓██░ ██▓▒██  ▀█▄  ▒▓█    ▄ 
+                   ▒██▄█▓▒ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒
+                   ▓███▒ ░  ▓█   ▓██▒▒ ▓███▀ ░
+                   ▒▓▒▒░    ▒▒   ▓▒█░░ ░▒ ▒  ░
+                   ▒ ░▒░    ▒   ▒▒ ░  ░  ▒   
+                   ░ ░ ░    ░   ▒   ░        
+                   ░   ░        ░  ░░ ░ 
+                  </div>
+
+
+                </div>
+
+
+
+              )
+     
           default:
             return `invalid command ${command} use 'help' to view available commands `;
       };
@@ -24,7 +59,14 @@ const InputCmd = () => {
       setInput("");
 
     };
+
+    useEffect(()=>{
+      const initialFetch = handleCommand('neofetch');
+      setHistory([{command:'',result:initialFetch}]);
+      setInput("")
+    },[]);
   return (
+    <>
     <div className="flex flex-col gap-4 pt-3 pl-2">
         <div>
           {history.map((entry,index)=>(
@@ -51,6 +93,7 @@ const InputCmd = () => {
       </form>
 
     </div>
+    </>
   )
 }
 
