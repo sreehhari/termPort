@@ -2,6 +2,10 @@
 import { useEffect, useState } from "react"
 // import { calculateAge } from "../age";
 
+interface AgeDisplayProps{
+  birthdate:string;
+}
+
  const calculateAge=(birthdate:string)=>{
   const now = new Date();
   const birth = new Date(birthdate);
@@ -12,7 +16,7 @@ import { useEffect, useState } from "react"
   }
   return age;
 };
-const AgeDisplay=({birthdate})=>{
+const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
   const[age,setAge]=useState(calculateAge(birthdate));
    
   useEffect(()=>{
