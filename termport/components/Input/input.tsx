@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
   }
   return age;
 };
-const AgeDisplay=({birthdate:string})=>{
+const AgeDisplay=({birthdate})=>{
   const[age,setAge]=useState(calculateAge(birthdate));
    
   useEffect(()=>{
@@ -20,7 +20,7 @@ const AgeDisplay=({birthdate:string})=>{
       setAge(calculateAge(birthdate))
     },1000);
     return ()=>clearInterval(interval);
-  },[birthdate]);
+  },[]);
 
   return(
     <div>
