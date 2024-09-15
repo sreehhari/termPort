@@ -125,16 +125,52 @@ const InputCmd = () => {
                           ls -- this lists all files and directories in the current working directory
                         </li>
                         <li>
-                          cd -- this stands for change working directory.. it&apos;s similar to double clicking a folder in windows
-                          usage: cd 
+                          whoami -- pretty self-explanatory
                         </li>
+
+                        <li>
+                          clear--clears the terminal
+                        </li>
+                        <li>
+                          socials --displays my socials
+                        </li>
+                        <li>
+                          projects --displays my projects
+                        </li>
+                        <li>
+                          neofetch -- displays that cool berserk logo and other info
+                        </li>
+                       
                        </ul>
                     </p>
                   </pre>
                   
                   </>
                 )
+
+              };
+
+              case"whoami":
+              return{
+                type:"man",
+                output:(
+                  <>
+                  <pre>
+                    <p>
+                    Hey, I&apos;m Sreehari! 👋
+  
+  I&apos;m a computer science student and web developer with a passion for open-source software and Linux customization. <br /> I dive deep into crafting intuitive websites and exploring new tech, whether it&apos;s working with JavaScript, TypeScript, or my favorite tools in the Linux ecosystem. <br />
+  
+  When I&apos;m not coding, you might find me tinkering with my Yamaha YZF-R15 or <br />diving into the world of anime. I&apos;m all about blending technology with creativity, and I&apos;m here to share that journey with you.
+                    </p>
+                  </pre>
+                  
+                  </>
+                )
               }
+
+              
+
             
               
      
