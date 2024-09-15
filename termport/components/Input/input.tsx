@@ -143,7 +143,7 @@ const InputCmd = () => {
 
 
 
-    const handleSubmit=(e)=>{
+    const handleSubmit=(e:React.FormEvent<HTMLFormElement>):void=>{
       e.preventDefault();
       const result =handleCommand(input);
       setHistory([...history,{command:input,result}]);
