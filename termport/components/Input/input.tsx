@@ -36,10 +36,14 @@ interface HistoryEntry{
   command:string;
   result:string | JSX.Element | {output:JSX.Element};
 }
+type CommandResult =
+  | string
+  | { type: string; output: JSX.Element };
+
 const InputCmd = () => {
     const[input,setInput]=useState<string>("");
     const[history,setHistory]=useState<HistoryEntry[]>([]);
-    const handleCommand=(command:string):string | {type:string;output:JSX.Element}=>{
+    const handleCommand=(command:string):CommandResult=>{
       switch(command){
           case "ls":
               return "projects, resume, contact me";
@@ -174,7 +178,7 @@ const InputCmd = () => {
                 )
                 :
                 (
-                  entry.result.output
+                  (entry.result as {output:JSX.Element}).output
                 )
               
               }
