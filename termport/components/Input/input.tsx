@@ -20,7 +20,7 @@ const AgeDisplay=({birthdate})=>{
       setAge(calculateAge(birthdate))
     },1000);
     return ()=>clearInterval(interval);
-  },[]);
+  },[birthdate]);
 
   return(
     <div>
@@ -104,7 +104,7 @@ const InputCmd = () => {
                   <pre>
                     <p>
                        true men refer the man pages.. 
-                       here's the help you need 
+                       here&apos;s the help you need 
                        <br />
                        <br />
                        <h2>Basic linux commands</h2>
@@ -113,7 +113,7 @@ const InputCmd = () => {
                           ls -- this lists all files and directories in the current working directory
                         </li>
                         <li>
-                          cd -- this stands for change working directory.. it's similar to double clicking a folder in windows
+                          cd -- this stands for change working directory.. it&apos;s similar to double clicking a folder in windows
                           usage: cd 
                         </li>
                        </ul>
