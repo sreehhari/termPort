@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react"
 // import { calculateAge } from "../age";
 
- const calculateAge=(birthdate)=>{
+ const calculateAge=(birthdate:string)=>{
   const now = new Date();
   const birth = new Date(birthdate);
   let age  = now.getFullYear()-birth.getFullYear();
@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
   }
   return age;
 };
-const AgeDisplay=({birthdate})=>{
+const AgeDisplay=({birthdate:string})=>{
   const[age,setAge]=useState(calculateAge(birthdate));
    
   useEffect(()=>{
@@ -78,12 +78,53 @@ const InputCmd = () => {
                     Sreehari 
                   <br />
                       <p className="flex flex-row">Age:<AgeDisplay birthdate='2003-09-04'/></p>
-                  Shell: seashells • Resolution: i prefer 4k
+                      <pre>
+                  Full-Stack Web dev | FOSS Enthusiast | Professional Distro-Hopper 
+                  <br />
+                  
+                  I also ride Motorcycles
+                  </pre>
+
                     </p>
                   </div>
                 </div>
               )
             };
+
+            case "help":
+              return `ohh you're lost bro ? 
+                fear not I'll guide u.. 
+                press control + w on your keyboard to get home`;
+
+            case "man":
+              return{
+                type:'man',
+                output:(
+                  <>
+                  <pre>
+                    <p>
+                       true men refer the man pages.. 
+                       here's the help you need 
+                       <br />
+                       <br />
+                       <h2>Basic linux commands</h2>
+                       <ul>
+                        <li>
+                          ls -- this lists all files and directories in the current working directory
+                        </li>
+                        <li>
+                          cd -- this stands for change working directory.. it's similar to double clicking a folder in windows
+                          usage: cd 
+                        </li>
+                       </ul>
+                    </p>
+                  </pre>
+                  
+                  </>
+                )
+              }
+            
+              
      
           default:
             return `invalid command ${command} use 'help' to view available commands `;
@@ -112,8 +153,10 @@ const InputCmd = () => {
     <div className="flex flex-col gap-4 pt-3 pl-2">
         <div>
           {history.map((entry,index)=>(
-            <div key={index} className="flex flex-row gap-4 pt-3 pl-2">
+            <div key={index} className="flex flex-row gap-2 pt-3 pl-2">
+              <pre>
               <p>ryu@latest</p>
+              </pre>
               <div className="flex flex-col">
               <p className="text-white">{entry.command}</p>
               <div className="text-green-500">
@@ -133,9 +176,11 @@ const InputCmd = () => {
           ))}
         </div>
         {/* <input className="  w-full bg-transparent outline-none text-white" type="text" /> */}
-      <form onSubmit={handleSubmit} className="w-full bg-transparent outline-none text-white" >
+      <form onSubmit={handleSubmit} className="w-full bg-transparent outline-none text-white flex flex-row" >
         <div>
-          <p>ryu@latest</p>
+          <pre>
+          <p className="p-2">ryu@latest</p>
+          </pre>
         </div>
         <input type="text"
          className="w-full bg-transparent outline-none text-white"
