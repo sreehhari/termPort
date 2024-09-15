@@ -17,7 +17,7 @@ interface AgeDisplayProps{
   return age;
 };
 const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
-  const[age,setAge]=useState(calculateAge(birthdate));
+  const[age,setAge]=useState<number>(calculateAge(birthdate));
    
   useEffect(()=>{
     const interval = setInterval(()=>{
@@ -32,10 +32,14 @@ const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
     </div>
   );
 };
+interface HistoryEntry{
+  command:string;
+  result:string | JSX.Element | {output:JSX.Element};
+}
 const InputCmd = () => {
-    const[input,setInput]=useState("");
-    const[history,setHistory]=useState([]);
-    const handleCommand=(command)=>{
+    const[input,setInput]=useState<string>("");
+    const[history,setHistory]=useState<HistoryEntry[]>([]);
+    const handleCommand=(command:string):string | {type:string;output:JSX.Element}=>{
       switch(command){
           case "ls":
               return "projects, resume, contact me";
