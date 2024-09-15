@@ -12,38 +12,41 @@ const InputCmd = () => {
             return "meow";
 
           case "neofetch":
-              return(
-                <div className="flex flex-row  ">
+            return {
+              type:"neofetch",
+              output:(
+                <div className="flex flex-row">
+                  <div>
+                    <p>
+                    BatmanOS 1.0 • Kernel: Linux Arch
+                  <br />
+                  Uptime: 7 days • Packages: 1234 (pacman)
+                  <br />
+                  Shell: zsh • Resolution: 1920x1080
+                    </p>
+                  </div>
 
                   <div>
-                  <p>
-                BatmanOS 1.0 • Kernel: Linux Arch
-                <br />
-                Uptime: 7 days • Packages: 1234 (pacman)
-                <br />
-                Shell: zsh • Resolution: 1920x1080
-                  </p>
+                    <pre>
+                      {
+                        `
+ ██▓███  ▄▄▄       ▄████▄  
+ ▓██░  ██▒████▄    ▒██▀ ▀█  
+ ▓██░ ██▓▒██  ▀█▄  ▒▓█    ▄ 
+ ▒██▄█▓▒ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒
+ ▓███▒ ░  ▓█   ▓██▒▒ ▓███▀ ░
+ ▒▓▒▒░    ▒▒   ▓▒█░░ ░▒ ▒  ░
+ ▒ ░▒░    ▒   ▒▒ ░  ░  ▒   
+ ░ ░ ░    ░   ▒   ░        
+ ░   ░        ░  ░░ ░ 
+                        
+                        `
+                      }
+                    </pre>
                   </div>
-
-                  <div >
-
-                   ██▓███  ▄▄▄       ▄████▄  
-                   ▓██░  ██▒████▄    ▒██▀ ▀█  
-                   ▓██░ ██▓▒██  ▀█▄  ▒▓█    ▄ 
-                   ▒██▄█▓▒ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒
-                   ▓███▒ ░  ▓█   ▓██▒▒ ▓███▀ ░
-                   ▒▓▒▒░    ▒▒   ▓▒█░░ ░▒ ▒  ░
-                   ▒ ░▒░    ▒   ▒▒ ░  ░  ▒   
-                   ░ ░ ░    ░   ▒   ░        
-                   ░   ░        ░  ░░ ░ 
-                  </div>
-
-
                 </div>
-
-
-
               )
+            };
      
           default:
             return `invalid command ${command} use 'help' to view available commands `;
@@ -74,7 +77,18 @@ const InputCmd = () => {
               <p>ryu@latest</p>
               <div className="flex flex-col">
               <p className="text-white">{entry.command}</p>
-              <p className="text-green-500">{entry.result}</p>
+              <div className="text-green-500">
+                {typeof entry.result==='string'?
+                (
+                  <p>{entry.result}</p>
+                )
+                :
+                (
+                  entry.result.output
+                )
+              
+              }
+              </div>
               </div>
             </div>
           ))}
