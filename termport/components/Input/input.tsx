@@ -1,6 +1,33 @@
 "use client"
-import { useDebugValue, useEffect, useState } from "react"
+import { useEffect, useState } from "react"
+// import { calculateAge } from "../age";
 
+ const calculateAge=(birthdate)=>{
+  const now = new Date();
+  const birth = new Date(birthdate);
+  let age  = now.getFullYear()-birth.getFullYear();
+  const monthDifference= now.getMonth()-birth.getMonth();
+  if(monthDifference<0 || monthDifference===0 && now.getDate()<birth.getDate()){
+    age--;
+  }
+  return age;
+};
+const AgeDisplay=({birthdate})=>{
+  const[age,setAge]=useState(calculateAge(birthdate));
+   
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      setAge(calculateAge(birthdate))
+    },1000);
+    return ()=>clearInterval(interval);
+  },[birthdate]);
+
+  return(
+    <div>
+      <p>{age} years</p>
+    </div>
+  );
+};
 const InputCmd = () => {
     const[input,setInput]=useState("");
     const[history,setHistory]=useState([]);
@@ -16,33 +43,43 @@ const InputCmd = () => {
               type:"neofetch",
               output:(
                 <div className="flex flex-row">
-                  <div>
-                    <p>
-                    BatmanOS 1.0 • Kernel: Linux Arch
-                  <br />
-                  Uptime: 7 days • Packages: 1234 (pacman)
-                  <br />
-                  Shell: zsh • Resolution: 1920x1080
-                    </p>
-                  </div>
+
 
                   <div>
                     <pre>
                       {
                         `
- ██▓███  ▄▄▄       ▄████▄  
- ▓██░  ██▒████▄    ▒██▀ ▀█  
- ▓██░ ██▓▒██  ▀█▄  ▒▓█    ▄ 
- ▒██▄█▓▒ ░██▄▄▄▄██ ▒▓▓▄ ▄██▒
- ▓███▒ ░  ▓█   ▓██▒▒ ▓███▀ ░
- ▒▓▒▒░    ▒▒   ▓▒█░░ ░▒ ▒  ░
- ▒ ░▒░    ▒   ▒▒ ░  ░  ▒   
- ░ ░ ░    ░   ▒   ░        
- ░   ░        ░  ░░ ░ 
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⣰⣾⠁⠀⢦⣾⣤⠆⠀⠻⣧⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⢠⣼⠏⠀⠀⠀⠀⣿⡇⠀⠀⠀⠈⢷⣄⠀⠀⠀⠀
+⠀⠀⢀⣸⣿⠃⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⢿⣧⡀⠀⠀
+⠀⢰⣾⣿⡁⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⢀⣿⣿⠖⠀
+⠀⠀⠈⠻⣿⣦⣄⠀⠀⠀⠀⣿⡇⠀⠀⠀⢀⣴⣿⠟⠁⠀⠀
+⠀⠀⠀⠀⠈⠻⢿⣷⣄⡀⠀⣿⡇⠀⣠⣾⣿⠟⠁⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠙⢿⣿⣦⣿⣧⣾⣿⠟⠁⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⢙⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⢀⣴⣿⣿⠟⠁⣻⣿⠈⠙⢿⣿⣦⡀⠀⠀⠀⠀
+⠀⠀⠀⢀⣴⣿⡿⠋⠀⠀⠀⣽⣿⠀⠀⠀⠙⢿⣿⣦⣄⠀⠀
+⠀⣠⣴⣿⡿⠋⠀⠀⠀⠀⠀⢼⣿⠀⠀⠀⠀⠀⠈⢻⣿⣷⣄
+⠈⠙⢿⣿⣦⣄⠀⠀⠀⠀⠀⢸⣿⠀⠀⠀⠀⠀⣠⣾⣿⠟⠁
+⠀⠀⠀⠙⢿⣿⣷⣄⠀⠀⠀⢸⣿⠀⠀⠀⣠⣾⣿⠟⠁⠀⠀
+⠀⠀⠀⠀⠀⠙⢻⣿⣷⡄⠀⢸⣿⠀⠀⣼⣿⣿⠃⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠈⠻⢿⣿⣦⣸⣿⣠⣾⣿⠟⠁⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⣿⣿⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀
+⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀
                         
                         `
                       }
                     </pre>
+                  </div>
+                  <div className="text-lg pt-52 pl-7">
+                    <p>
+                    Sreehari 
+                  <br />
+                      <p className="flex flex-row">Age:<AgeDisplay birthdate='2003-09-04'/></p>
+                  Shell: seashells • Resolution: i prefer 4k
+                    </p>
                   </div>
                 </div>
               )
@@ -54,6 +91,8 @@ const InputCmd = () => {
 
 
     };
+
+
 
     const handleSubmit=(e)=>{
       e.preventDefault();
