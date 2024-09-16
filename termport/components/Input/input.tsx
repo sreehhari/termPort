@@ -167,7 +167,12 @@ const InputCmd = () => {
                   
                   </>
                 )
-              }
+              };
+
+            case "clear":
+              return(
+                setHistory([])
+              )
 
               
 
