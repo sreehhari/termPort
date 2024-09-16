@@ -38,7 +38,8 @@ interface HistoryEntry{
 }
 type CommandResult =
   | string
-  | { type: string; output: JSX.Element };
+  | { type: string; output: JSX.Element }
+  |null;
 
 const InputCmd = () => {
     const[input,setInput]=useState<string>("");
@@ -170,9 +171,11 @@ const InputCmd = () => {
               };
 
             case "clear":
-              return(
-                setHistory([])
-              )
+              setHistory([]);
+              return null;
+
+                
+              
 
               
 
@@ -191,14 +194,19 @@ const InputCmd = () => {
     const handleSubmit=(e:React.FormEvent<HTMLFormElement>):void=>{
       e.preventDefault();
       const result =handleCommand(input);
+      if(result!=null){
       setHistory([...history,{command:input,result}]);
+      }
       setInput("");
+      
 
     };
 
     useEffect(()=>{
       const initialFetch = handleCommand('neofetch');
+      if(initialFetch!=null){
       setHistory([{command:'',result:initialFetch}]);
+      }
       setInput("")
     },[]);
   return (
