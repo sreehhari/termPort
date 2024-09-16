@@ -1,5 +1,6 @@
 "use client"
 import { useEffect, useState } from "react"
+import Link from "next/link";
 // import { calculateAge } from "../age";
 
 interface AgeDisplayProps{
@@ -173,6 +174,22 @@ const InputCmd = () => {
             case "clear":
               setHistory([]);
               return null;
+
+            case "cd projects":
+              return{
+                type:"cd projects",
+                output:(
+                  <>
+                  <ul>
+                    <li>
+                    {/* <a href="www.gigaweather.vercel.app" target="_blank" rel="noopener noreferrer">Weather App</a> */}
+                    <Link href="www.gigaweather.vercel.app" prefetch={true} legacyBehavior={true}>Weather App</Link>
+                    </li>
+                  </ul>
+                  
+                  </>
+                )
+              }
 
                 
               
