@@ -182,8 +182,19 @@ const InputCmd = () => {
                   <>
                   <ul>
                     <li>
-                    {/* <a href="www.gigaweather.vercel.app" target="_blank" rel="noopener noreferrer">Weather App</a> */}
-                    <Link href="www.gigaweather.vercel.app" prefetch={true} legacyBehavior={true}>Weather App</Link>
+                    <a href="https://gigaweather.vercel.app/" target="_blank" rel="noopener noreferrer">Weather App</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/ticketile">Movie ticket booking website</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/portfolio">Portfolio with gui(work in progress)</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/todoApp">Todo List</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/texticles">Text manipulation website</a>
                     </li>
                   </ul>
                   
