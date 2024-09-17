@@ -1,12 +1,49 @@
 "use client"
 import { useEffect, useState } from "react"
-import Link from "next/link";
 // import { calculateAge } from "../age";
-
+ 
 interface AgeDisplayProps{
   birthdate:string;
 }
 
+interface Resolution{
+  width:number;
+  height:number;
+}
+
+const useWindowResolution=():Resolution | null =>{
+  const isClient = typeof window !=='undefined';
+  const[resolution,setResolution]=useState<Resolution | null>(
+   isClient?{
+    width:window.screen.width,
+    height:window.screen.height,
+   }:
+   null //use null on the server
+  );
+
+ useEffect(()=>{
+  if(isClient){
+  const handleResize=()=>{
+    setResolution({
+      width:window.screen.width,
+      height:window.screen.height
+    });
+
+  };
+  window.addEventListener("resize",handleResize);
+  
+
+  // if(typeof window !=="undefined"){
+  //   handleResize();
+  //   window.addEventListener("resize",handleResize);
+  // }
+  return()=>{
+    window.removeEventListener("resize", handleResize);
+  };
+}
+ },[isClient]);
+ return resolution;
+};
  const calculateAge=(birthdate:string)=>{
   const now = new Date();
   const birth = new Date(birthdate);
@@ -45,6 +82,14 @@ type CommandResult =
 const InputCmd = () => {
     const[input,setInput]=useState<string>("");
     const[history,setHistory]=useState<HistoryEntry[]>([]);
+    const resolution = useWindowResolution();
+    // useEffect(() => {
+    //   if (resolution) {
+    //     console.log("Resolution updated:", resolution);
+    //   }
+    // }, [resolution]);
+    // console.log(resolution);
+    
     const handleCommand=(command:string):CommandResult=>{
       switch(command){
           case "ls":
@@ -88,10 +133,13 @@ const InputCmd = () => {
                     </pre>
                   </div>
                   <div className="text-lg pt-52 pl-7">
+                    <pre>
                     <p>
-                    Sreehari 
+                      <span className="font-extrabold ">Name:</span>Sreehari
                   <br />
-                      <p className="flex flex-row">Age:<AgeDisplay birthdate='2003-09-04'/></p>
+                      <p className="flex flex-row"><span className="font-extrabold">Uptime:</span><AgeDisplay birthdate='2003-09-04'/></p>
+                     <p><span className="font-extrabold">Shell:</span>Chromium</p>
+                     <p><span className="font-extrabold">Resolution:</span>{resolution?`${resolution.width}x${resolution.height}`:"fetching resolution"}</p>
                       <pre>
                   Full-Stack Web dev | FOSS Enthusiast | Professional Distro-Hopper 
                   <br />
@@ -100,6 +148,7 @@ const InputCmd = () => {
                   </pre>
 
                     </p>
+                    </pre>
                   </div>
                 </div>
               )
@@ -182,8 +231,19 @@ const InputCmd = () => {
                   <>
                   <ul>
                     <li>
-                    {/* <a href="www.gigaweather.vercel.app" target="_blank" rel="noopener noreferrer">Weather App</a> */}
-                    <Link href="www.gigaweather.vercel.app" prefetch={true} legacyBehavior={true}>Weather App</Link>
+                    <a href="https://gigaweather.vercel.app/" target="_blank" rel="noopener noreferrer">Weather App</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/ticketile">Movie ticket booking website</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/portfolio">Portfolio with gui(work in progress)</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/todoApp">Todo List</a>
+                    </li>
+                    <li>
+                      <a href="https://github.com/sreehhari/texticles">Text manipulation website</a>
                     </li>
                   </ul>
                   
