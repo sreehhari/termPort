@@ -11,6 +11,8 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'sapphire':'#85c1dc',
+        'midwhite':'#cdd6f4'
       },
     },
   },

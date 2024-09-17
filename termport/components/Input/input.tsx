@@ -1,12 +1,40 @@
 "use client"
 import { useEffect, useState } from "react"
-import Link from "next/link";
 // import { calculateAge } from "../age";
-
+ 
 interface AgeDisplayProps{
   birthdate:string;
 }
 
+interface Resolution{
+  width:number;
+  height:number;
+}
+
+const useWindowResolution=():Resolution | null =>{
+  const[resolution,setResolution]=useState<Resolution>({
+    width:window.screen.width,
+    height:window.screen.height
+  });
+
+ useEffect(()=>{
+  const handleResize=()=>{
+    setResolution({
+      width:window.screen.width,
+      height:window.screen.height
+    });
+
+  };
+  if(typeof window !=="undefined"){
+    handleResize();
+    window.addEventListener("resize",handleResize);
+  }
+  return()=>{
+    window.removeEventListener("resize", handleResize);
+  };
+ },[]);
+ return resolution;
+};
  const calculateAge=(birthdate:string)=>{
   const now = new Date();
   const birth = new Date(birthdate);
@@ -45,6 +73,14 @@ type CommandResult =
 const InputCmd = () => {
     const[input,setInput]=useState<string>("");
     const[history,setHistory]=useState<HistoryEntry[]>([]);
+    const resolution = useWindowResolution();
+    // useEffect(() => {
+    //   if (resolution) {
+    //     console.log("Resolution updated:", resolution);
+    //   }
+    // }, [resolution]);
+    // console.log(resolution);
+    
     const handleCommand=(command:string):CommandResult=>{
       switch(command){
           case "ls":
@@ -88,10 +124,13 @@ const InputCmd = () => {
                     </pre>
                   </div>
                   <div className="text-lg pt-52 pl-7">
+                    <pre>
                     <p>
-                    Sreehari 
+                      <span className="font-extrabold ">Name:</span>Sreehari
                   <br />
-                      <p className="flex flex-row">Age:<AgeDisplay birthdate='2003-09-04'/></p>
+                      <p className="flex flex-row"><span className="font-extrabold">Uptime:</span><AgeDisplay birthdate='2003-09-04'/></p>
+                     <p><span className="font-extrabold">Shell:</span>Chromium</p>
+                     <p><span className="font-extrabold">Resolution:</span>{resolution?`${resolution.width}x${resolution.height}`:"fetching resolution"}</p>
                       <pre>
                   Full-Stack Web dev | FOSS Enthusiast | Professional Distro-Hopper 
                   <br />
@@ -100,6 +139,7 @@ const InputCmd = () => {
                   </pre>
 
                     </p>
+                    </pre>
                   </div>
                 </div>
               )
