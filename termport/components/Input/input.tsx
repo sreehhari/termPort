@@ -12,12 +12,17 @@ interface Resolution{
 }
 
 const useWindowResolution=():Resolution | null =>{
-  const[resolution,setResolution]=useState<Resolution>({
+  const isClient = typeof window !=='undefined';
+  const[resolution,setResolution]=useState<Resolution | null>(
+   isClient?{
     width:window.screen.width,
-    height:window.screen.height
-  });
+    height:window.screen.height,
+   }:
+   null //use null on the server
+  );
 
  useEffect(()=>{
+  if(isClient){
   const handleResize=()=>{
     setResolution({
       width:window.screen.width,
@@ -25,14 +30,18 @@ const useWindowResolution=():Resolution | null =>{
     });
 
   };
-  if(typeof window !=="undefined"){
-    handleResize();
-    window.addEventListener("resize",handleResize);
-  }
+  window.addEventListener("resize",handleResize);
+  
+
+  // if(typeof window !=="undefined"){
+  //   handleResize();
+  //   window.addEventListener("resize",handleResize);
+  // }
   return()=>{
     window.removeEventListener("resize", handleResize);
   };
- },[]);
+}
+ },[isClient]);
  return resolution;
 };
  const calculateAge=(birthdate:string)=>{
