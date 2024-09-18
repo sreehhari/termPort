@@ -231,25 +231,33 @@ const InputCmd = () => {
                   <>
                   <ul>
                     <li>
-                    <a href="https://gigaweather.vercel.app/" target="_blank" rel="noopener noreferrer">Weather App</a>
+                    <a href="https://gigaweather.vercel.app/" target="_blank" rel="noopener noreferrer" className="underline">Weather App</a>
                     </li>
                     <li>
-                      <a href="https://github.com/sreehhari/ticketile">Movie ticket booking website</a>
+                      <a href="https://github.com/sreehhari/ticketile" target="_blank" rel="noopener noreferrer" className="underline">Movie ticket booking website</a>
                     </li>
                     <li>
-                      <a href="https://github.com/sreehhari/portfolio">Portfolio with gui(work in progress)</a>
+                      <a href="https://github.com/sreehhari/portfolio" target="_blank" rel="noopener noreferrer" className="underline">Portfolio with gui(work in progress)</a>
                     </li>
                     <li>
-                      <a href="https://github.com/sreehhari/todoApp">Todo List</a>
+                      <a href="https://github.com/sreehhari/todoApp" target="_blank" rel="noopener noreferrer" className="underline">Todo List</a>
                     </li>
                     <li>
-                      <a href="https://github.com/sreehhari/texticles">Text manipulation website</a>
+                      <a href="https://github.com/sreehhari/texticles" target="_blank" rel="noopener noreferrer" className="underline">Text manipulation website</a>
                     </li>
                   </ul>
                   
                   </>
                 )
-              }
+              };
+
+
+            case "pwd":
+              return "/root/dir/just/kidding/this/is/a/web/page";
+            
+            
+              
+        
 
                 
               
