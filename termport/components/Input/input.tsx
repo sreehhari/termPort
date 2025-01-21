@@ -70,21 +70,7 @@ const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
     </div>
   );
 };
-const getSong=()=>{
-  const [lastTrack,setLastTrack]=useState('no song');
-  useEffect(()=>{
-    async function getLastTrack(){
-      const res = await fetch('/api');
-      const data = await res.json();
-      if(data.error){
-        console.error(data.error);
-      }else{
-        console.log('last track is :',data);
-      }
-    }
-    getLastTrack();
-  },[])
-}
+
 interface HistoryEntry{
   command:string;
   result:string | JSX.Element | {output:JSX.Element};
