@@ -70,6 +70,21 @@ const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
     </div>
   );
 };
+const getSong=()=>{
+  const [lastTrack,setLastTrack]=useState('no song');
+  useEffect(()=>{
+    async function getLastTrack(){
+      const res = await fetch('/api');
+      const data = await res.json();
+      if(data.error){
+        console.error(data.error);
+      }else{
+        console.log('last track is :',data);
+      }
+    }
+    getLastTrack();
+  },[])
+}
 interface HistoryEntry{
   command:string;
   result:string | JSX.Element | {output:JSX.Element};
@@ -155,9 +170,45 @@ const InputCmd = () => {
             };
 
             case "help":
-              return `ohh you're lost bro ? 
-                fear not I'll guide u.. 
-                press control + w on your keyboard to get home`;
+              return{
+                type:'man',
+                output:(
+                  <>
+                  <pre>
+                    <p>
+                       here&apos;s the help you need 
+                       <br />
+                       <br />
+                       <h2>Basic linux commands</h2>
+                       <ul>
+                        <li>
+                          ls -- this lists all files and directories in the current working directory
+                        </li>
+                        <li>
+                          whoami -- pretty self-explanatory
+                        </li>
+
+                        <li>
+                          clear--clears the terminal
+                        </li>
+                        <li>
+                          socials --displays my socials
+                        </li>
+                        <li>
+                          projects --displays my projects
+                        </li>
+                        <li>
+                          neofetch -- displays that cool berserk logo and other info
+                        </li>
+                       
+                       </ul>
+                    </p>
+                  </pre>
+                  
+                  </>
+                )
+
+              };
 
             case "man":
               return{
