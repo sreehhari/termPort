@@ -71,6 +71,46 @@ const AgeDisplay=({birthdate}:AgeDisplayProps)=>{
   );
 };
 
+
+//spotify function
+interface Track{
+  name:string;
+  artists:string[];
+}
+
+const SpotiPlayed=()=>{
+  const[track,setTrack]=useState<Track | null>(null)
+  useEffect(()=>{
+    async function fetLastPlayed(){
+      try{
+        const response = await fetch("/api/spotify/last-played");
+        const data = await response.json();
+        setTrack(data);
+      }catch(error){
+        console.error("Error fetching last played song :",error);
+      }
+    }
+    fetLastPlayed();
+  },[]);
+  return(
+    <div className="p-4 bg-black text-green-50 font-mono">
+{ track ? (
+  <div>
+  <p>
+    {track.name}-{track.artists.join(", ")}
+  </p>
+</div>
+):(
+  <p>loading last played track...</p>
+)
+        
+}
+      
+    
+    </div>
+  )
+}
+
 interface HistoryEntry{
   command:string;
   result:string | JSX.Element | {output:JSX.Element};
@@ -141,6 +181,7 @@ const InputCmd = () => {
                       <p className="flex flex-row"><span className="font-extrabold">Uptime:</span><AgeDisplay birthdate='2003-09-04'/></p>
                      <p><span className="font-extrabold">Shell:</span>Chromium</p>
                      <p><span className="font-extrabold">Resolution:</span>{resolution?`${resolution.width}x${resolution.height}`:"fetching resolution"}</p>
+                     <p><span className="font-extrabold">Last Played:</span>{SpotiPlayed()}</p>
                       <pre>
                   Full-Stack Web dev | FOSS Enthusiast | Professional Distro-Hopper 
                   <br />
