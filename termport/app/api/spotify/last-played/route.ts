@@ -1,10 +1,9 @@
 import {spawn} from "child_process";
-import { error } from "console";
 import path from "path";
 
 
 export async function GET() {
-    return new Promise((resolve)=>{
+    return new Promise<void | Response>((resolve)=>{
         const pythonscript = path.join(process.cwd(),"scripts","spotify_create.py");
         const pythonExecutable = path.join(process.cwd(),".venv","bin","python3");
         const childProcess = spawn(pythonExecutable,[pythonscript]);
