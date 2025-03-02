@@ -91,7 +91,7 @@ const SpotiPlayed=()=>{
       }
     }
     fetLastPlayed();
-  },);
+  },[]);
   return(
     <div className="">
 { track ? (
