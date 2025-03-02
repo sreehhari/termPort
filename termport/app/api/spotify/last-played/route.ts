@@ -29,7 +29,7 @@ export async function GET() {
         childProcess.on("close",(code)=>{
             if(code===0){
                 try{
-                    const jsonData=JSON.parse(data.trim());
+                    // const jsonData=JSON.parse(data.trim());
                     resolve(new Response(data,{status:200}));
 
                 }catch(error){

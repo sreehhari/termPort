@@ -91,13 +91,13 @@ const SpotiPlayed=()=>{
       }
     }
     fetLastPlayed();
-  },[]);
+  },);
   return(
     <div className="">
 { track ? (
   <div>
   <p className="font-bold">
-    {track.name}-{track.artists.join(" ,")}
+   :p {track.name}-{track.artists.join(" ,")}
   </p>
 </div>
 ):(
