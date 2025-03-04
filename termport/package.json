@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "vercel-build": "./vercel-build.sh"
+    "lint": "next lint"
   },
   "dependencies": {
     "@spotify/web-api-ts-sdk": "^1.2.0",

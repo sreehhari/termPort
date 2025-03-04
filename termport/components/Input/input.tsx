@@ -78,37 +78,67 @@ interface Track{
   artists:string[];
 }
 
-const SpotiPlayed=()=>{
-  const[track,setTrack]=useState<Track | null>(null)
-  useEffect(()=>{
-    async function fetLastPlayed(){
-      try{
-        const response = await fetch("/api/spotify/last-played");
-        const data = await response.json();
-        setTrack(data);
-      }catch(error){
-        console.error("Error fetching last played song :",error);
-      }
-    }
-    fetLastPlayed();
-  },[]);
-  return(
-    <div className="">
-{ track ? (
-  <div>
-  <p className="font-bold">
-   :p {track.name}-{track.artists.join(" ,")}
-  </p>
-</div>
-):(
-  <p>loading last played track...</p>
-)
+// const SpotiPlayed=()=>{
+//   const[track,setTrack]=useState<Track | null>(null)
+//   useEffect(()=>{
+//     async function fetLastPlayed(){
+//       try{
+//         const response = await fetch("/api/spotify/last-played");
+//         const data = await response.json();
+//         setTrack(data);
+//       }catch(error){
+//         console.error("Error fetching last played song :",error);
+//       }
+//     }
+//     fetLastPlayed();
+//   },[]);
+//   return(
+//     <div className="">
+// { track ? (
+//   <div>
+//   <p className="font-bold">
+//    :p {track.name}-{track.artists.join(" ,")}
+//   </p>
+// </div>
+// ):(
+//   <p>loading last played track...</p>
+// )
         
-}
+// }
       
     
+//     </div>
+//   )
+// }
+
+const Played=()=>{
+  const [track,setTrack]=useState<Track | null>(null);
+  useEffect(()=>{
+    fetch("/api/recent-track")
+    .then((res)=>res.json())
+    .then((data)=>setTrack(data))
+    .catch((error)=>console.error("error making the call:",error));  
+   
+  },[]);
+
+
+  return(
+        <div className="">
+    { track ? (
+      <div>
+      <p className="font-bold">
+       :p {track.name}-{track.artists.join(" ,")}
+      </p>
     </div>
-  )
+    ):(
+      <p>loading last played track...</p>
+    )
+            
+    }
+          
+        
+        </div>
+      )
 }
 
 interface HistoryEntry{
@@ -181,7 +211,7 @@ const InputCmd = () => {
                       <p className="flex flex-row"><span className="font-extrabold">Uptime:</span><AgeDisplay birthdate='2003-09-04'/></p>
                      <p><span className="font-extrabold">Shell:</span>Chromium</p>
                      <p><span className="font-extrabold">Resolution:</span>{resolution?`${resolution.width}x${resolution.height}`:"fetching resolution"}</p>
-                     <p><span className="font-extrabold">Now Playing:</span><SpotiPlayed /></p>
+                     <p><span className="font-extrabold">Now Playing:</span><Played /></p>
                       <pre>
                   Full-Stack Web dev | FOSS Enthusiast | Professional Distro-Hopper 
                   <br />
