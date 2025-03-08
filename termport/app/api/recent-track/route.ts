@@ -1,12 +1,10 @@
 import { NextResponse } from "next/server";
+export const dynamic = 'force-dynamic'; 
+
 
 export async function GET(){
     try{
-        const res = await fetch("https://spotiserver-yvnu.onrender.com/recent-track",{
-            headers:{
-                'Cache-control':'no-store'
-            }
-        });
+        const res = await fetch("https://spotiserver-yvnu.onrender.com/recent-track");
         if(!res.ok) throw new Error("failed to fetch data");
 
         const data = await res.json();
