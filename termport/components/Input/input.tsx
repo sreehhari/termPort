@@ -124,7 +124,7 @@ const Played=()=>{
 
   return(
         <div className="">
-    { track ? (
+    { track?.name && track.artists ? (
       <div>
       <p className="font-bold">
        :p {track.name}-{track.artists.join(" ,")}
